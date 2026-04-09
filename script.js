@@ -1,13 +1,11 @@
 const apiKey = "b7bf10cc49d449768b454425260904";
 
-// Enter key support
 document.getElementById("city").addEventListener("keypress", function (e) {
     if (e.key === "Enter") {
         getWeather();
     }
 });
 
-// Get weather by city
 async function getWeather() {
     const city = document.getElementById("city").value;
 
@@ -31,7 +29,6 @@ async function getWeather() {
     updateUI(data);
 }
 
-// Get weather by location
 function getLocationWeather() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(async (position) => {
@@ -53,11 +50,9 @@ function getLocationWeather() {
     }
 }
 
-// Update UI + background
 function updateUI(data) {
     const condition = data.current.condition.text.toLowerCase();
 
-    // Dynamic background
     if (condition.includes("sunny") || condition.includes("clear")) {
         document.body.style.background = "linear-gradient(135deg, #f7971e, #ffd200)";
     } else if (condition.includes("cloud")) {
@@ -68,7 +63,6 @@ function updateUI(data) {
         document.body.style.background = "linear-gradient(135deg, #007bff, #00c6ff)";
     }
 
-    // Display data
     document.getElementById("result").innerHTML = `
         <h2>${data.location.name}</h2>
         <img src="https:${data.current.condition.icon}">
